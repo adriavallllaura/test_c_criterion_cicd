@@ -1,0 +1,47 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential git libcriterion-dev
+    
+    - name: Build
+      run: chmod +x build.sh && ./build.sh
+    
+    - name: Run tests
+      run: ./test
+      continue-on-error: false
+    
+    - name: Notify on failure
+      if: failure()
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: smtp.gmail.com
+        server_port: 465
+        secure: true
+        username: ${{ secrets.EMAIL_USERNAME }}
+        password: ${{ secrets.EMAIL_PASSWORD }}
+        subject: '❌ CI/CD Pipeline Failed - ${{ github.repository }}'
+        to: ${{ secrets.EMAIL_TO }}
+        from: GitHub Actions
+        body: |
+          The CI/CD pipeline has failed for commit ${{ github.sha }}.
+          
+          Workflow details: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+    
+    - name: Deploy (on success)
+      if: success()
+      run: |
+        echo "Deployment would happen here"
+        # Aquí irían los comandos para desplegar tu aplicación
+        # Por ejemplo: scp -r ./ user@server:/path/to/deploy/
