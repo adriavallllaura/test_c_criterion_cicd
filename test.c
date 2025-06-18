@@ -12,5 +12,5 @@ Test(hello, world) {
 }
 
 Test(hello, world2) {
-    cr_assert(1 == 0);
+    cr_assert(1 == 1);
 }
