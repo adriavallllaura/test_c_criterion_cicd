@@ -13,8 +13,6 @@ Test(point, new_point_function) {
     cr_assert_eq(p.y, 4, "Expected y coordinate to be 4");
 }
 
-// Ejemplo de prueba que falla intencionalmente
-// Test(point, failing_test_example) {
-//     Point p = new_point(1, 2);
-//     cr_assert_fail("Esta prueba falla intencionalmente");
-// }
+Test(point, failing_test_example) {
+    cr_assert_fail("Esta prueba falla intencionalmente");
+}
