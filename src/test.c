@@ -13,6 +13,8 @@ Test(point, new_point_function) {
     cr_assert_eq(p.y, 4, "Expected y coordinate to be 4");
 }
 
+/*
 Test(point, failing_test_example) {
     cr_assert_fail("Esta prueba falla intencionalmente");
 }
+*/
