@@ -32,12 +32,20 @@ jobs:
         username: ${{ secrets.EMAIL_USERNAME }}
         password: ${{ secrets.EMAIL_PASSWORD }}
         subject: '❌ CI/CD Pipeline Failed - ${{ github.repository }}'
-        to: ${{ secrets.EMAIL_TO }}
-        from: GitHub Actions
+        to: ${{ secrets.EMAIL_TO || '' }}
+        from: GitHub Actions <${{ secrets.EMAIL_USERNAME }}>
         body: |
-          The CI/CD pipeline has failed for commit ${{ github.sha }}.
+          ❌ CI/CD Pipeline Failed
           
-          Workflow details: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          Repository: ${{ github.repository }}
+          Workflow: ${{ github.workflow }}
+          Status: Failed
+          Commit: ${{ github.sha }}
+          Branch: ${{ github.ref }}
+          
+          View the run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          
+          Please check the workflow run for more details.
     
     - name: Deploy (on success)
       if: success()
