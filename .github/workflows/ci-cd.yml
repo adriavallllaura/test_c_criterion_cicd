@@ -19,7 +19,7 @@ jobs:
       run: chmod +x build.sh && ./build.sh
     
     - name: Run tests
-      run: ./test
+      run: ./bin/test
       continue-on-error: false
     
     - name: Notify on failure
