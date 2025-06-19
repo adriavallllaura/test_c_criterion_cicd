@@ -1,0 +1,40 @@
+# Archivos objeto
+*.o
+*.obj
+
+# Binarios
+a.out
+*.exe
+*.out
+*.app
+*.so
+*.dll
+
+# Directorios de compilación
+bin/
+build/
+dist/
+
+# Archivos temporales
+*.swp
+*~
+*.swo
+.DS_Store
+
+# Archivos de entorno
+.env
+
+# Archivos de IDE
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Archivos de respaldo
+*.bak
+*.backup
+
+# Archivos de depuración
+*.dSYM/
+*.dSYM.zip
+*.dSYM/
